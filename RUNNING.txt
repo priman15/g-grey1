@@ -1,0 +1,33 @@
+The application is capable of running on both Amazon Web Services(AWS) and the Simon Fraser University's inhouse Spark Cluster. The only difference is the starter code that is used.
+Steps:
+1. Clone the branch to your local system.
+
+To run on SFU's inhouse Spark Cluster
+2. Copy code to the Cluster in a directory
+   cd into the directory 
+   Copy the 3 input files to HDFS namely:
+	ticker.txt 
+	Gdp.csv 
+	UnempRate_Monthly.csv 
+3. Run the follwing command to start the executio
+	spark-submit starter_cluster.py
+
+To run on AWS EMR & S3 
+
+1. Create a new S3 bucket named: c732-301427187-a5-dm 
+2. Create a new EMR cluster. Use the bootstrap.sh file to add a bootstrap step Once the cluster is running add a new Step by clicking on the 'Add Step' button and use the following values:
+	Step type (Dropdown): Spark Application
+	Name (Text): Team-Grey-Project-Run
+	Deploy mode (Dropdown): Client
+	Spark-submit options (Text): --conf spark.yarn.maxAppAttempts=1
+	Application location (Text): s3://c732-301427187-a5-dm/starter.py
+	Action on failure (Dropdown): Continue [Default]
+	Click Add (Lower right)
+
+Loading latest data from S3 bucket to Power BI 
+1. Open Power BI 
+2. Import the Financial-Impact-Of-Covid-Visualization.pbix file 
+3. Select Get data > Other > Python script
+4. Insert the code written in s3_connector.py
+5. Update the AWS keys, bucket name
+6. Press OK
